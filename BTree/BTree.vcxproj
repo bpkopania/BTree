@@ -127,11 +127,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BTree.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Student.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BTree.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Student.h" />
   </ItemGroup>
