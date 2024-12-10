@@ -4,9 +4,12 @@
 #include <vector>
 #include <fstream>
 
-constexpr int d = 2;
+constexpr int d = 8;
 constexpr int maxRecord = 2 * d;
 constexpr int maxChild = 2 * d + 1;
+
+int h = 0;
+int nodes = 0;
 
 class BTreeNode {
 public:
@@ -72,7 +75,7 @@ public:
 		return index;
 	}
 
-	void insert(int key, int recordOffset)
+	void insert(int key, int recordOffset, int leftPointer = -1)
 	{
 		int index = findInsertPosition(key);
 
@@ -80,7 +83,7 @@ public:
 
 		keys[index] = key;
 		recordIndex[index] = recordOffset;
-		childIndexes[index + 1] = -1;
+		childIndexes[index + 1] = leftPointer;
 	}
 };
 
@@ -99,6 +102,7 @@ private:
 
 	BTreeNode readNode(int index)
 	{
+		readWriteCounter++;
 		std::ifstream file(bTreeFile, std::ios::binary);
 		if (!file.is_open())
 		{
@@ -133,6 +137,7 @@ private:
 
 	int writeNode(BTreeNode node)
 	{
+		readWriteCounter++;
 		std::ofstream file(bTreeFile, std::ios::binary | std::ios::app);
 		if (!file.is_open())
 		{
@@ -167,6 +172,7 @@ private:
 
 	void updateNode(int index, BTreeNode node)
 	{
+		readWriteCounter++;
 		std::fstream file(bTreeFile, std::ios::in | std::ios::out | std::ios::binary);
 		if (!file.is_open())
 		{
@@ -315,6 +321,7 @@ private:
 		// if parent
 		if(currentPage.parentIndex == -1)
 		{
+			h++;
 			// create new parent
 			BTreeNode newParent(-1);
 
@@ -368,7 +375,7 @@ private:
 				std::copy(currentPage.keys + d + 1, currentPage.keys + maxRecord, newNeighbour.keys);
 				std::copy(currentPage.recordIndex + d + 1, currentPage.recordIndex + maxRecord, newNeighbour.recordIndex);
 				std::copy(currentPage.childIndexes + d + 1, currentPage.childIndexes + maxChild, newNeighbour.childIndexes);
-				newNeighbour.insert(key, recordOffset);
+				newNeighbour.insert(key, recordOffset,linker);
 			}
 			else
 			{
@@ -384,6 +391,15 @@ private:
 			}
 
 			int newNeighbourIndex = writeNode(newNeighbour);
+			if (linker != -1)
+			{
+				for (int i = 0; i < d + 1; i++)
+				{
+					BTreeNode child = readNode(newNeighbour.childIndexes[i]);
+					child.parentIndex = newNeighbourIndex;
+					updateNode(newNeighbour.childIndexes[i], child);
+				}
+			}
 
 			//setting children
 			newParent.childIndexes[0] = currentPageIndex;
@@ -419,13 +435,14 @@ private:
 			{
 				// make currentPage smaller
 				currentPage.size = d - 1;
-				currentPage.parentIndex = rootIndex;
+				//currentPage.parentIndex = rootIndex;
 
 				// create new neighbour
 				newNeighbour.size = d;
 				std::copy(currentPage.keys + d, currentPage.keys + maxRecord, newNeighbour.keys);
 				std::copy(currentPage.recordIndex + d, currentPage.recordIndex + maxRecord, newNeighbour.recordIndex);
 				std::copy(currentPage.childIndexes + d, currentPage.childIndexes + maxChild, newNeighbour.childIndexes);
+				newNeighbour.childIndexes[d] = linker;
 
 				// insert into currentPage
 				insertIntoCurrentNode(key, recordOffset);
@@ -434,7 +451,7 @@ private:
 			{
 				// make currentPage smaller
 				currentPage.size = d;
-				currentPage.parentIndex = rootIndex;
+				//currentPage.parentIndex = rootIndex;
 				updateNode(currentPageIndex, currentPage);
 
 				// create new neighbour
@@ -443,11 +460,12 @@ private:
 				std::copy(currentPage.recordIndex + d + 1, currentPage.recordIndex + maxRecord, newNeighbour.recordIndex);
 				std::copy(currentPage.childIndexes + d + 1, currentPage.childIndexes + maxChild, newNeighbour.childIndexes);
 				newNeighbour.insert(key, recordOffset);
+				newNeighbour.childIndexes[d] = linker;
 			}
 			else
 			{
 				currentPage.size = d;
-				currentPage.parentIndex = rootIndex;
+				//currentPage.parentIndex = rootIndex;
 				updateNode(currentPageIndex, currentPage);
 
 				// create new neighbour
@@ -455,8 +473,20 @@ private:
 				std::copy(currentPage.keys + d, currentPage.keys + maxRecord, newNeighbour.keys);
 				std::copy(currentPage.recordIndex + d, currentPage.recordIndex + maxRecord, newNeighbour.recordIndex);
 				std::copy(currentPage.childIndexes + d, currentPage.childIndexes + maxChild, newNeighbour.childIndexes);
+				newNeighbour.childIndexes[d] = linker;
 			}
 			int newNeighbourIndex = writeNode(newNeighbour);
+			if(linker!=-1)
+			{
+				for (int i = 0; i < d + 1; i++)
+				{
+					BTreeNode child = readNode(newNeighbour.childIndexes[i]);
+					child.parentIndex = newNeighbourIndex;
+					updateNode(newNeighbour.childIndexes[i], child);
+				}
+			}
+			
+
 
 			if(parent.size < 2*d)
 			{
@@ -480,8 +510,12 @@ private:
 	}
 
 public:
+	int readWriteCounter = 0;
+
 	BTree()
 	{
+		h = 1;
+		nodes = 0;
 		resetDB();
 		rootIndex = 0;
 		currentPageIndex = 0;
@@ -492,6 +526,7 @@ public:
 
 	int insert(int key, T record)
 	{
+		readWriteCounter = 0;
 		if(currentPageIndex == rootIndex)
 		{
 			currentPage = readNode(rootIndex);
@@ -554,6 +589,7 @@ public:
 
 	void print()
 	{
+		readWriteCounter = 0;
 		printInOrder(rootIndex);
 	}
 
