@@ -316,6 +316,12 @@ private:
 		return false;
 	}
 
+	BTreeNode child;
+	BTreeNode newParent;
+	BTreeNode parent;
+
+	BTreeNode newNeighbour;
+
 	void splitNode(int key, int recordOffset, int linker = -1)
 	{
 		// if parent
@@ -323,7 +329,7 @@ private:
 		{
 			h++;
 			// create new parent
-			BTreeNode newParent(-1);
+			newParent = BTreeNode(-1);
 
 			// finding the middle element
 			int index = currentPage.findInsertPosition(key);
@@ -345,7 +351,7 @@ private:
 				rootIndex = writeNode(newParent);
 			}
 
-			BTreeNode newNeighbour(rootIndex);
+			newNeighbour = BTreeNode(rootIndex);
 			currentPage.parentIndex = rootIndex;
 
 			if(index < 2)
@@ -395,7 +401,7 @@ private:
 			{
 				for (int i = 0; i < d + 1; i++)
 				{
-					BTreeNode child = readNode(newNeighbour.childIndexes[i]);
+					child = readNode(newNeighbour.childIndexes[i]);
 					child.parentIndex = newNeighbourIndex;
 					updateNode(newNeighbour.childIndexes[i], child);
 				}
@@ -428,9 +434,9 @@ private:
 				nextRecordOffset = currentPage.recordIndex[d + bias];
 			}
 			int parentIndex = currentPage.parentIndex;
-			BTreeNode parent = readNode(parentIndex);
+			parent = readNode(parentIndex);
 			int currentIndexInParent = parent.findInsertPosition(nextKey);
-			BTreeNode newNeighbour(parentIndex);
+			newNeighbour = BTreeNode(parentIndex);
 			if (index < 2)
 			{
 				// make currentPage smaller
@@ -480,7 +486,7 @@ private:
 			{
 				for (int i = 0; i < d + 1; i++)
 				{
-					BTreeNode child = readNode(newNeighbour.childIndexes[i]);
+					child = readNode(newNeighbour.childIndexes[i]);
 					child.parentIndex = newNeighbourIndex;
 					updateNode(newNeighbour.childIndexes[i], child);
 				}
@@ -593,22 +599,30 @@ public:
 		printInOrder(rootIndex);
 	}
 
+	BTreeNode printerNode;
+
 private:
 	void printInOrder(int index) {
 		if (index < 0) return;
 
-		BTreeNode node = readNode(index);
+		printerNode = readNode(index);
 
-		for (int i = 0; i < node.size; i++) {
-			if(node.childIndexes[i]>=0)
-				printInOrder(node.childIndexes[i]);
-			printf("%11d ", node.keys[i]);
-			auto record = readRecord(node.recordIndex[i]);
+		for (int i = 0; i < printerNode.size; i++) {
+			if (printerNode.childIndexes[i] >= 0)
+			{
+				printInOrder(printerNode.childIndexes[i]);
+				printerNode = readNode(printerNode.parentIndex);
+			}
+			printf("%11d ", printerNode.keys[i]);
+			auto record = readRecord(printerNode.recordIndex[i]);
 			record.print();
 			//printf("\n");
 		}
-		if(node.childIndexes[node.size]>=0)
-			printInOrder(node.childIndexes[node.size]);
+		if (printerNode.childIndexes[printerNode.size] >= 0)
+		{
+			printInOrder(printerNode.childIndexes[printerNode.size]);
+			printerNode = readNode(printerNode.parentIndex);
+		}
 	}
 
 public:
