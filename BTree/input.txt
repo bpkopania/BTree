@@ -1,0 +1,34 @@
+i 101 Anna 6 6 6
+i 25 Bartek 5 6 6
+i 1 Cezary 6 6 6
+i 58 Daria 5 6 6
+i 105 Ewelina 6 6 5
+i 645 Filip 5 5 5
+i 57 Gosia 6 6 6
+i 108 Hubert 5 6 6
+i 14 Iwona 6 6 6
+i 57 Jakub 5 6 5
+i 95 Kasia 5 5 5
+i 112 Lukasz 6 6 6
+i 113 Marta 6 6 6
+i 65 Natalia 6 6 6
+i 115 Olek 5 5 5
+i 32 Patrycja 5 6 5
+i 117 Radek 6 6 6
+i 12 Sara 6 6 6
+i 119 Tomek 6 6 6
+i 45 Ula 5 5 5
+i 78 Weronika 5 5 5
+i 32 Xawery 6 6 6
+i 11 Yvonne 6 6 6
+i 124 Zbigniew 5 5 5
+i 20 Alicja 6 6 5
+i 87 Bogdan 6 6 6
+i 29 Celina 6 6 6
+i 56 Damian 5 5 5
+i 37 Emilia 6 6 6
+i 38 Franek 5 6 5
+s 124
+s 999
+p
+q

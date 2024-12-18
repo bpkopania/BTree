@@ -4,7 +4,7 @@
 #include <vector>
 #include <fstream>
 
-constexpr int d = 8;
+constexpr int d = 2;
 constexpr int maxRecord = 2 * d;
 constexpr int maxChild = 2 * d + 1;
 
@@ -211,7 +211,7 @@ private:
 		{
 			return true;
 		}
-		else if(currentPage.childIndexes[i] != -1)
+		else if(currentPage.childIndexes[i] > -1)
 		{
 			currentPageIndex = currentPage.childIndexes[i];
 			currentPage = readNode(currentPage.childIndexes[i]);
@@ -649,5 +649,71 @@ public:
 		currentPageIndex = 0;
 		BTreeNode root(-1);
 		writeNode(root);
+	}
+
+	void printStruct()
+	{
+		
+		BTreeNode currentNode;
+		int i = 0;
+		int index = getNumberOfNodes();
+		currentNode = readNode(i);
+		while(index>=i)
+		{
+			if (currentNode.size <= 0)
+			{
+				currentNode = readNode(++i);
+				continue;
+			}
+			std::cout << "\n" << i << ": ";
+			if(currentNode.parentIndex==-1)
+			{
+				std::cout << "Root Node";
+			}
+			else if(currentNode.childIndexes[0] >= 0)
+			{
+				std::cout << "non-root non-leaf node";
+			}
+			else
+			{
+				std::cout << "leaf node";
+			}
+			std::cout << "\n  Parent: " << currentPage.parentIndex;
+			std::cout << "\n  Size: " << currentPage.size;
+			if(currentNode.size>0)
+				std::cout << "\n  record offset\n";
+			for(int j=0;j<currentNode.size;j++)
+			{
+				std::cout << "    " <<j << " " << currentNode.recordIndex[j] << " " << currentNode.keys[j] << "\n";
+			}
+			if(currentNode.childIndexes[0] >= 0)
+			{
+				std::cout << "child Pages\n";
+				for (int j = 0; j < currentNode.size + 1; j++)
+				{
+					std::cout << "    " << j << " " << currentNode.childIndexes[j] << "\n";
+				}
+			}
+			
+
+			i++;
+			currentNode = readNode(i);
+		}
+	}
+
+	int getNumberOfNodes()
+	{
+		std::ofstream file(bTreeFile, std::ios::binary | std::ios::app);
+		if (!file.is_open())
+		{
+			std::cout << "Unable to open BTree file.";
+			return -1;
+		}
+
+		file.seekp(0, std::ios::end);
+		int index = file.tellp() / sizeof(BTreeNode);
+		file.close();
+
+		return index;
 	}
 };

@@ -31,6 +31,7 @@ void printMenu() {
 	std::cout << "i - insert\n";
 	std::cout << "s - search\n";
 	std::cout << "p - print\n";
+	std::cout << "c - pretty print\n";
 	std::cout << "q - quit\n";
 }
 
@@ -39,9 +40,9 @@ int main()
 	setlocale(LC_ALL, "");
 
 
-	BTree<IntegerBTree> b_tree;
+	/*BTree<IntegerBTree> b_tree;
 	IntegerBTree record;
-	record.value = 10;
+	record.value = 10;*/
 
 	/*//b_tree.insert(1, record);
 	b_tree.insert(20, record);
@@ -67,27 +68,28 @@ int main()
 
 	b_tree.insert(44, record);*/
 
-	for(int i = 0;i< 1000;i++)
-	{
-		b_tree.insert(i, record);
-		//b_tree.print();
-	}
-	std::cout << " number of read and write opertions: " << b_tree.readWriteCounter;
+	//for(int i = 0;i< 1000;i++)
+	//{
+	//	b_tree.insert(i, record);
+	//	//b_tree.print();
+	//}
+	//std::cout << " number of read and write opertions: " << b_tree.readWriteCounter;
 
 
-	b_tree.print();
-	std::cout << " number of read and write opertions: " << b_tree.readWriteCounter;
-	std::cout << "Number of nodes in file: " << countNodesInFile("BTree.dat") << std::endl;
+	//b_tree.print();
+	//std::cout << " number of read and write opertions: " << b_tree.readWriteCounter;
+	//std::cout << "Number of nodes in file: " << countNodesInFile("BTree.dat") << std::endl;
 
-	/*BTree<Student> b_tree;
+	BTree<Student> b_tree;
 	char command;
 	char name[30];
 	short kol1, kol2, kol3;
 	int key;
 
 	printMenu();
+	bool isExit = false;
 
-	while (true) {
+	while (!isExit) {
 		std::cout << "Podaj instrukcję: ";
 		std::cin >> command;
 
@@ -126,14 +128,18 @@ int main()
 		case 'p':
 			b_tree.print();
 			break;
+		case 'c':
+			b_tree.printStruct();
+			break;
 		case 'q':
+			isExit = true;
 			return 0;
 		default:
 			std::cout << "Nieznana instrukcja.\n";
 			printMenu();
 			break;
 		}
-	}*/
-
+	}
+	getchar();
 	return 0;
 }

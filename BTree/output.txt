@@ -1,0 +1,36 @@
+Instrukcje:
+i - insert
+s - search
+p - print
+q - quit
+Podaj instrukcjê: Podaj klucz: Podaj imiê: Podaj kol1: Podaj kol2: Podaj kol3: Podaj instrukcjê: Podaj klucz: Podaj imiê: Podaj kol1: Podaj kol2: Podaj kol3: Podaj instrukcjê: Podaj klucz: Podaj imiê: Podaj kol1: Podaj kol2: Podaj kol3: Podaj instrukcjê: Podaj klucz: Podaj imiê: Podaj kol1: Podaj kol2: Podaj kol3: Podaj instrukcjê: Podaj klucz: Podaj imiê: Podaj kol1: Podaj kol2: Podaj kol3: Podaj instrukcjê: Podaj klucz: Podaj imiê: Podaj kol1: Podaj kol2: Podaj kol3: Podaj instrukcjê: Podaj klucz: Podaj imiê: Podaj kol1: Podaj kol2: Podaj kol3: Podaj instrukcjê: Podaj klucz: Podaj imiê: Podaj kol1: Podaj kol2: Podaj kol3: Podaj instrukcjê: Podaj klucz: Podaj imiê: Podaj kol1: Podaj kol2: Podaj kol3: Podaj instrukcjê: Podaj klucz: Podaj imiê: Podaj kol1: Podaj kol2: Podaj kol3: Podaj instrukcjê: Podaj klucz: Podaj imiê: Podaj kol1: Podaj kol2: Podaj kol3: Podaj instrukcjê: Podaj klucz: Podaj imiê: Podaj kol1: Podaj kol2: Podaj kol3: Podaj instrukcjê: Podaj klucz: Podaj imiê: Podaj kol1: Podaj kol2: Podaj kol3: Podaj instrukcjê: Podaj klucz: Podaj imiê: Podaj kol1: Podaj kol2: Podaj kol3: Podaj instrukcjê: Podaj klucz: Podaj imiê: Podaj kol1: Podaj kol2: Podaj kol3: Podaj instrukcjê: Podaj klucz: Podaj imiê: Podaj kol1: Podaj kol2: Podaj kol3: Podaj instrukcjê: Podaj klucz: Podaj imiê: Podaj kol1: Podaj kol2: Podaj kol3: Podaj instrukcjê: Podaj klucz: Podaj imiê: Podaj kol1: Podaj kol2: Podaj kol3: Podaj instrukcjê: Podaj klucz: Podaj imiê: Podaj kol1: Podaj kol2: Podaj kol3: Podaj instrukcjê: Podaj klucz: Podaj imiê: Podaj kol1: Podaj kol2: Podaj kol3: Podaj instrukcjê: Podaj klucz: Podaj imiê: Podaj kol1: Podaj kol2: Podaj kol3: Podaj instrukcjê: Podaj klucz: Podaj imiê: Podaj kol1: Podaj kol2: Podaj kol3: Podaj instrukcjê: Podaj klucz: Podaj imiê: Podaj kol1: Podaj kol2: Podaj kol3: Podaj instrukcjê: Podaj klucz: Podaj imiê: Podaj kol1: Podaj kol2: Podaj kol3: Podaj instrukcjê: Podaj klucz: Podaj imiê: Podaj kol1: Podaj kol2: Podaj kol3: Podaj instrukcjê: Podaj klucz: Podaj imiê: Podaj kol1: Podaj kol2: Podaj kol3: Podaj instrukcjê: Podaj klucz: Podaj imiê: Podaj kol1: Podaj kol2: Podaj kol3: Podaj instrukcjê: Podaj klucz: Podaj imiê: Podaj kol1: Podaj kol2: Podaj kol3: Podaj instrukcjê: Podaj klucz: Podaj imiê: Podaj kol1: Podaj kol2: Podaj kol3: Podaj instrukcjê: Podaj klucz: Podaj imiê: Podaj kol1: Podaj kol2: Podaj kol3: Podaj instrukcjê: Podaj klucz do wyszukania: Klucz 124 znaleziony.
+Podaj instrukcjê: Podaj klucz do wyszukania: Klucz 999 nie znaleziony.
+Podaj instrukcjê:           1 Cezary                            6    6    6  6,00
+         11 Yvonne                            6    6    6  6,00
+         12 Sara                              6    6    6  6,00
+         14 Iwona                             6    6    6  6,00
+         20 Alicja                            6    6    5  5,67
+         25 Bartek                            5    6    6  5,67
+         29 Celina                            6    6    6  6,00
+         32 Patrycja                          5    6    5  5,33
+         37 Emilia                            6    6    6  6,00
+         38 Franek                            5    6    5  5,33
+         45 Ula                               5    5    5  5,00
+         56 Damian                            5    5    5  5,00
+         57 Gosia                             6    6    6  6,00
+         58 Daria                             5    6    6  5,67
+         65 Natalia                           6    6    6  6,00
+         78 Weronika                          5    5    5  5,00
+         87 Bogdan                            6    6    6  6,00
+         95 Kasia                             5    5    5  5,00
+        101 Anna                              6    6    6  6,00
+        105 Ewelina                           6    6    5  5,67
+        108 Hubert                            5    6    6  5,67
+        112 Lukasz                            6    6    6  6,00
+        113 Marta                             6    6    6  6,00
+        115 Olek                              5    5    5  5,00
+        117 Radek                             6    6    6  6,00
+        119 Tomek                             6    6    6  6,00
+        124 Zbigniew                          5    5    5  5,00
+        645 Filip                             5    5    5  5,00
+Podaj instrukcjê: 
